@@ -11,7 +11,7 @@
       label="Categories"
       name="categories"
       isRequired
-      :options="options"
+      :options="categoryOptions"
     />
   </div>
 </template>
@@ -25,7 +25,7 @@ import {
 import { Ref, ref } from "vue"
 import { IOptionMultiple } from "../../../models"
 
-const options: Ref<IOptionMultiple[]> = ref([
+const categoryOptions: Ref<IOptionMultiple[]> = ref([
   {
     label: "T-Shirt",
     value: "t-shirt",

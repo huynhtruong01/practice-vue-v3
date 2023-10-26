@@ -7,22 +7,27 @@
     :errorMsg="errorMessage || ''"
   >
     <template #input>
-      <textarea
+      <input
         v-model="value"
-        name="description"
+        :name="props.name"
+        :type="props.type || 'text'"
         :id="props.name"
-        rows="6"
+        :readonly="!!props.readonly"
         :class="
           twMerge(
             'p-2 pr-8 border rounded outline-none',
-            false ? 'border-red-500' : 'border-slate-200'
+            errorMessage ? 'border-red-500' : 'border-slate-200'
           )
         "
-      ></textarea>
+      />
+      <button
+        type="button"
+        class="absolute top-1/2 right-0 px-4 h-full -translate-y-1/2 text-sm bg-gray-500 text-white rounded"
+        @click="handleGenerateBarcode"
+      >
+        Generate
+      </button>
     </template>
-    <template #character>{{
-      typeof value === "string" ? value.length : 0
-    }}</template>
   </FieldContainer>
 </template>
 
@@ -31,15 +36,23 @@ import { defineProps } from "vue"
 import { twMerge } from "tailwind-merge"
 import { useField } from "vee-validate"
 import FieldContainer from "./FieldContainer.vue"
+import { generateBarcodeNumber } from "../../utils/common"
 
 const props = defineProps<{
   label: string
   name: string
   maxCharacters?: number
   isRequired?: boolean
+  type?: string
+  readonly?: boolean
 }>()
 
-const { value, errorMessage }: any = useField(props.name, undefined)
+const { value, errorMessage, setValue } = useField(props.name, undefined)
+
+const handleGenerateBarcode = () => {
+  const value = generateBarcodeNumber()
+  setValue(value)
+}
 </script>
 
 <style scoped></style>

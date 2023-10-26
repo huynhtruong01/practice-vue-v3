@@ -2,7 +2,7 @@
   <FieldContainer
     :label="props.label"
     :name="props.name"
-    :maxCharacter="props.maxCharacters"
+    :maxCharacters="props.maxCharacters"
     :isRequired="props.isRequired"
     :errorMsg="errorMessage || ''"
   >
@@ -11,7 +11,7 @@
         v-model="value"
         :name="props.name"
         :type="props.type || 'text'"
-        id="productName"
+        :id="props.name"
         :class="
           twMerge(
             'p-2 pr-8 border rounded outline-none',
@@ -20,7 +20,9 @@
         "
       />
     </template>
-    <template #character>{{ value.length || 0 }}</template>
+    <template #character>{{
+      typeof value === "string" ? value.length : 0
+    }}</template>
   </FieldContainer>
 </template>
 

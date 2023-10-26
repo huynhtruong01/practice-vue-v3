@@ -16,7 +16,7 @@
       <slot name="input"></slot>
 
       <div
-        v-if="maxCharacters"
+        v-if="props.maxCharacters"
         :class="
           twMerge(
             'absolute bottom-2 right-4',

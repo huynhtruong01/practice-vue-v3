@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge('max-w-[1150px] m-auto px-4', props.class)">
+  <div :class="twMerge('max-w-[1300px] m-auto px-4', props.class)">
     <slot></slot>
   </div>
 </template>

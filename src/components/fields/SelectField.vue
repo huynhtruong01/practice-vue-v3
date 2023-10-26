@@ -8,12 +8,11 @@
   >
     <template #input>
       <Multiselect
-        mode="tags"
+        :mode="props.mode || 'tags'"
         v-model="value"
         name="categories"
         :options="options"
         placeholder="Choose category"
-        @select="handleSelectCategories"
         :searchable="true"
         :close-on-select="false"
         :create="true"
@@ -24,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, defineProps, ref } from "vue"
-import { twMerge } from "tailwind-merge"
+import { defineProps } from "vue"
 import { useField } from "vee-validate"
 import FieldContainer from "./FieldContainer.vue"
 import { IOptionMultiple } from "../../models/common"
 import Multiselect from "@vueform/multiselect"
+import MultiselectProps from "@vueform/multiselect"
 
 const props = defineProps<{
   label: string
@@ -37,15 +36,10 @@ const props = defineProps<{
   maxCharacters?: number
   isRequired?: boolean
   options: IOptionMultiple[]
+  mode?: MultiselectProps["mode"]
 }>()
 
-const categories: Ref<IOptionMultiple[]> = ref([])
-
 const { value, errorMessage } = useField(props.name, undefined)
-
-const handleSelectCategories = (value: string, option: IOptionMultiple) => {
-  categories.value = [...categories.value, { ...option }]
-}
 </script>
 
 <style scoped></style>

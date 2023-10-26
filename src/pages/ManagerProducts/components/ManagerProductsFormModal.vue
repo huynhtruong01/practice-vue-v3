@@ -110,12 +110,12 @@ const { handleSubmit, handleReset, meta, isSubmitting, setFieldValue } =
       discount: 0,
       brand: "",
       provider: "",
-      barcode: "",
+      barcode: 0,
     },
   })
 const props = defineProps<{
   showModal: boolean
-  product: IProduct
+  product: IProduct | null
 }>()
 const emits = defineEmits(["closeModal"])
 const store = useStore()
@@ -158,11 +158,13 @@ const handleAddProduct = (values: IProductForm) => {
 }
 
 const handleUpdateProduct = (values: IProductForm) => {
-  store.dispatch("productListStore/updateProduct", {
-    ...values,
-    description: values.description || "",
-    id: props.product.id,
-  })
+  if (props.product) {
+    store.dispatch("productListStore/updateProduct", {
+      ...values,
+      description: values.description || "",
+      id: props.product.id,
+    })
+  }
   toast.success(`Update product ${values.name}`)
 }
 

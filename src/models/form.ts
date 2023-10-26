@@ -1,5 +1,3 @@
-import { IOptionMultiple } from "."
-
 export interface IProductForm {
   name: string
   price: number
@@ -9,5 +7,5 @@ export interface IProductForm {
   discount: number
   brand: string
   provider: string
-  barcode: string
+  barcode: number
 }

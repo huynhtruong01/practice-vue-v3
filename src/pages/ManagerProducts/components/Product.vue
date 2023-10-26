@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td>{{ props.product.name }}</td>
-    <td class="max-w-[500px]">
+    <td class="max-w-[200px] min-w-[150px] line-clamp-2 pb-1">
       <p v-if="props.product.description">{{ props.product.description }}</p>
       <p v-if="!props.product.description">No description</p>
     </td>
@@ -19,17 +19,17 @@
     <td>
       {{ props.product.firm }}
     </td>
-    <td>
+    <td class="text-right">
       {{ discount }}
     </td>
-    <td>
+    <td class="text-right">
       {{ props.product.brand }}
     </td>
-    <td>
+    <td class="text-right">
       {{ props.product.provider }}
     </td>
-    <td>
-      {{ props.product.barcode }}
+    <td class="text-right">
+      {{ props.product.barcode.toString().slice(0, 5) }}...
     </td>
     <td>
       <div class="flex gap-2 items-center h-full">

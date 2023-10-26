@@ -1,7 +1,7 @@
 <template>
   <Transition appear>
     <div class="py-8 m-auto">
-      <div class="mb-4">
+      <div class="mb-6">
         <button
           class="bg-red-500 font-medium text-white rounded px-4 py-2 hover:bg-red-700"
           @click="handleShowModal(true)"
@@ -18,11 +18,11 @@
               <th>Price</th>
               <th>Categories</th>
               <th>Firm</th>
-              <th>Discount</th>
-              <th>Brand</th>
-              <th>Provider</th>
-              <th>Barcode</th>
-              <th>Action</th>
+              <th class="text-right">Discount</th>
+              <th class="text-right">Brand</th>
+              <th class="text-right">Provider</th>
+              <th class="text-right">Barcode</th>
+              <th class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -62,17 +62,16 @@
 
 <script setup lang="ts">
 import ManagerProductFormModal from "./components/ManagerProductsFormModal.vue"
-import { Ref, ref, onMounted, Transition } from "vue"
+import { Ref, ref, Transition } from "vue"
 import { IProduct } from "../../models/product"
 import Product from "./components/Product.vue"
 import { useStore } from "vuex"
 import ModalDeleteProduct from "./components/ModalDeleteProduct.vue"
 import ManagerProductInfoForm from "./components/ManagerProductInfoForm.vue"
 import ManagerProductPlatform from "./components/MagagerProductPlatform.vue"
+import { useChangeDocTitle } from "../../hooks"
 
-onMounted(() => {
-  document.title = "Manager Product"
-})
+useChangeDocTitle("Manager Product")
 
 const store = useStore()
 const showModal: Ref<boolean> = ref(false)
