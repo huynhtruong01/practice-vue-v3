@@ -1,29 +1,27 @@
 <template>
-  <FieldContainer
-    :label="props.label"
-    :name="props.name"
-    :maxCharacters="props.maxCharacters"
-    :isRequired="props.isRequired"
-    :errorMsg="errorMessage || ''"
-  >
-    <template #input>
-      <textarea
-        v-model="value"
-        name="description"
-        :id="props.name"
-        rows="6"
-        :class="
-          twMerge(
-            'p-2 pr-8 border rounded outline-none',
-            false ? 'border-red-500' : 'border-slate-200'
-          )
-        "
-      ></textarea>
-    </template>
-    <template #character>{{
-      typeof value === "string" ? value.length : 0
-    }}</template>
-  </FieldContainer>
+    <FieldContainer
+        :label="props.label"
+        :name="props.name"
+        :maxCharacters="props.maxCharacters"
+        :isRequired="props.isRequired"
+        :errorMsg="errorMessage || ''"
+    >
+        <template #input>
+            <textarea
+                v-model="value"
+                name="description"
+                :id="props.name"
+                rows="6"
+                :class="
+                    twMerge(
+                        'p-2 pr-8 border rounded outline-none',
+                        false ? 'border-red-500' : 'border-slate-200',
+                    )
+                "
+            ></textarea>
+        </template>
+        <template #character>{{ value.length }}</template>
+    </FieldContainer>
 </template>
 
 <script setup lang="ts">
@@ -33,13 +31,13 @@ import { useField } from "vee-validate"
 import FieldContainer from "./FieldContainer.vue"
 
 const props = defineProps<{
-  label: string
-  name: string
-  maxCharacters?: number
-  isRequired?: boolean
+    label: string
+    name: string
+    maxCharacters?: number
+    isRequired?: boolean
 }>()
 
-const { value, errorMessage }: any = useField(props.name, undefined)
+const { value, errorMessage } = useField<string>(props.name)
 </script>
 
 <style scoped></style>
